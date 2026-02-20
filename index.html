@@ -2,30 +2,62 @@
 <html>
 <head>
   <title>GitHub Notification Test</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 40px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    input {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      width: 300px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: #45a049;
+    }
+  </style>
 </head>
 <body>
   <h2>Press the button to send a notification</h2>
-  <br/>
+
+  <input id="TitleEntry" type="text" placeholder="Title">
+  <input id="ContentEntry" type="text" placeholder="Body">
+
   <button id="notifyBtn">Send Notification</button>
-  <br/>
-  <input id="TitleEntry" type="text" placeholder="TitleEntry"></input>
-  <br/>
-  <input id="ContentEntry" type="text" placeholder="Body"></input>
 
   <script>
-    // Ask for permission on load
     if (Notification.permission !== "granted") {
       Notification.requestPermission();
     }
 
     document.getElementById("notifyBtn").onclick = () => {
-      if (Notification.permission === "granted") {
-        new Notification(document.getElementById("TitleEntry").value, {
-          body: document.getElementById("ContentEntry").value
-        });
-      } else {
-        alert("Please allow notifications first.");
-      }
+      new Notification(
+        document.getElementById("TitleEntry").value,
+        { body: document.getElementById("ContentEntry").value }
+      );
     };
   </script>
 </body>
