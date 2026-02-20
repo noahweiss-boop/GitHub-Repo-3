@@ -405,9 +405,7 @@
     eas.addEventListener("ended", () => {
       const mode = document.getElementById("soundMode").value;
       if (mode === "tts-eas") {
-        const msg = new SpeechSynthesisUtterance(
-          document.getElementById("ContentEntry").value
-        );
+        const msg = new SpeechSynthesisUtterance(generateEASMessage());
         speechSynthesis.speak(msg);
         updateStatus("EAS alarm finished; TTS now speaking.");
       }
@@ -422,9 +420,7 @@
         eas.play();
         updateStatus("Issuing alert: EAS alarm then TTS.");
       } else if (mode === "tts-only") {
-        const msg = new SpeechSynthesisUtterance(
-          document.getElementById("ContentEntry").value
-        );
+        const msg = new SpeechSynthesisUtterance(generateEASMessage());
         speechSynthesis.speak(msg);
         updateStatus("Issuing alert: TTS only.");
       } else if (mode === "eas-only") {
