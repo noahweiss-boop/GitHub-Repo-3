@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GitHub Notification Test</title>
+</head>
+<body>
+  <h2>Press the button to send a notification</h2>
+
+  <button id="notifyBtn">Send Notification</button>
+
+  <script>
+    // Ask for permission on load
+    if (Notification.permission !== "granted") {
+      Notification.requestPermission();
+    }
+
+    document.getElementById("notifyBtn").onclick = () => {
+      if (Notification.permission === "granted") {
+        new Notification("Button Pressed!", {
+          body: "Your GitHub-hosted page just sent a notification."
+        });
+      } else {
+        alert("Please allow notifications first.");
+      }
+    };
+  </script>
+</body>
+</html>
