@@ -106,21 +106,6 @@
       max-height: 200px;
     }
 
-    .row {
-      display: flex;
-      gap: 8px;
-    }
-
-    .row > * {
-      flex: 1;
-    }
-
-    .small {
-      font-size: 11px;
-      color: #888;
-      margin-top: 4px;
-    }
-
     .buttons {
       margin-top: 14px;
       display: flex;
@@ -185,7 +170,7 @@
     <div class="sub">Operator interface for composing and issuing EAS‑style severe weather alerts.</div>
 
     <div class="grid">
-      <!-- LEFT: SETTINGS -->
+      <!-- LEFT PANEL -->
       <div class="panel">
         <div class="panel-title">Alert configuration</div>
 
@@ -213,7 +198,7 @@
 
         <label for="soundMode">Sound Profile</label>
         <select id="soundMode">
-          <option value="tts-eas">TTS then EAS Alarm</option>
+          <option value="tts-eas">EAS Alarm → TTS</option>
           <option value="tts-only">TTS Only</option>
           <option value="eas-only">EAS Alarm Only</option>
           <option value="silent">Silent (Notification Only)</option>
@@ -224,11 +209,9 @@
           <button type="button" onclick="testEAS()">Test Alarm</button>
           <button type="button" class="danger" onclick="stopAll()">Stop Audio</button>
         </div>
-
-        <div class="small">Audio is triggered only on operator interaction to comply with browser autoplay rules.</div>
       </div>
 
-      <!-- RIGHT: MESSAGE COMPOSITION -->
+      <!-- RIGHT PANEL -->
       <div class="panel">
         <div class="panel-title">Message composition</div>
 
@@ -255,12 +238,10 @@
     </div>
   </div>
 
-  <!-- AUDIO: EXACT FILENAMES -->
-  <audio id="ttsSound" src="mp3-output-ttsfree(dot)com.mp3"></audio>
+  <!-- ONLY ONE AUDIO FILE NEEDED -->
   <audio id="easSound" src="n00by-usa-eas-alarm-314375.mp3"></audio>
 
   <script>
-    const tts = document.getElementById("ttsSound");
     const eas = document.getElementById("easSound");
     const statusLine = document.getElementById("statusLine");
 
@@ -269,6 +250,7 @@
         (bad ? '<span class="bad">' + msg + '</span>' : msg);
     }
 
+    // Notification permission
     if (Notification.permission === "granted") {
       updateStatus("Notification permission granted.");
     } else if (Notification.permission === "denied") {
@@ -276,33 +258,36 @@
     } else {
       updateStatus("Notification permission not yet requested.", true);
       Notification.requestPermission().then(p => {
-        if (p === "granted") {
-          updateStatus("Notification permission granted.");
-        } else {
-          updateStatus("Notification permission denied or dismissed.", true);
-        }
+        if (p === "granted") updateStatus("Notification permission granted.");
+        else updateStatus("Notification permission denied or dismissed.", true);
       });
     }
 
+    // Stop all audio + TTS
     function stopAll() {
-      [tts, eas].forEach(a => {
-        a.pause();
-        a.currentTime = 0;
-      });
+      eas.pause();
+      eas.currentTime = 0;
+      speechSynthesis.cancel();
     }
 
+    // Test TTS
     function testTTS() {
       stopAll();
-      tts.play();
-      updateStatus("Playing TTS test audio.");
+      const msg = new SpeechSynthesisUtterance(
+        document.getElementById("ContentEntry").value
+      );
+      speechSynthesis.speak(msg);
+      updateStatus("Playing TTS test.");
     }
 
+    // Test EAS
     function testEAS() {
       stopAll();
       eas.play();
-      updateStatus("Playing EAS alarm test audio.");
+      updateStatus("Playing EAS alarm test.");
     }
 
+    // Load template
     function loadTemplate() {
       const eventType = document.getElementById("eventType").value;
       const area = document.getElementById("area").value || "Apple Valley, San Bernardino County, and the Cajon Pass";
@@ -316,47 +301,58 @@
         " until " + expires +
         ". Hazard: 60 mph winds and quarter-size hail. Seek shelter indoors immediately.";
 
-      updateStatus("Template loaded from configuration.");
+      updateStatus("Template loaded.");
     }
 
+    // Clear fields
     function clearFields() {
       document.getElementById("TitleEntry").value = "";
       document.getElementById("ContentEntry").value = "";
       updateStatus("Fields cleared.");
     }
 
-    tts.addEventListener("ended", () => {
+    // 🔥 When EAS alarm ends → speak TTS
+    eas.addEventListener("ended", () => {
       const mode = document.getElementById("soundMode").value;
       if (mode === "tts-eas") {
-        eas.play();
-        updateStatus("TTS finished; EAS alarm playing.");
+        const msg = new SpeechSynthesisUtterance(
+          document.getElementById("ContentEntry").value
+        );
+        speechSynthesis.speak(msg);
+        updateStatus("EAS alarm finished; TTS now speaking.");
       }
     });
 
+    // Issue alert
     document.getElementById("notifyBtn").onclick = () => {
       const mode = document.getElementById("soundMode").value;
 
       stopAll();
 
       if (mode === "tts-eas") {
-        tts.play();
-        updateStatus("Issuing alert: TTS then EAS alarm.");
-      } else if (mode === "tts-only") {
-        tts.play();
+        eas.play();
+        updateStatus("Issuing alert: EAS alarm then TTS.");
+      } 
+      else if (mode === "tts-only") {
+        const msg = new SpeechSynthesisUtterance(
+          document.getElementById("ContentEntry").value
+        );
+        speechSynthesis.speak(msg);
         updateStatus("Issuing alert: TTS only.");
-      } else if (mode === "eas-only") {
+      } 
+      else if (mode === "eas-only") {
         eas.play();
         updateStatus("Issuing alert: EAS alarm only.");
-      } else {
-        updateStatus("Issuing alert: silent mode (notification only).");
+      } 
+      else {
+        updateStatus("Issuing alert: silent mode.");
       }
 
+      // Desktop notification
       if (Notification.permission === "granted") {
         new Notification(
           document.getElementById("TitleEntry").value || "Alert",
-          {
-            body: document.getElementById("ContentEntry").value || "An alert has been issued."
-          }
+          { body: document.getElementById("ContentEntry").value || "An alert has been issued." }
         );
       } else {
         updateStatus("Cannot send notification: permission not granted.", true);
