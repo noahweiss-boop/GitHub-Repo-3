@@ -1,63 +1,366 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>GitHub Notification Test</title>
-
+  <title>EAS Issuance Console</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      padding: 40px;
+      margin: 0;
+      background: #05070a;
+      font-family: "Consolas", "Courier New", monospace;
+      color: #e5e5e5;
     }
 
-    h2 {
-      margin-bottom: 20px;
+    .frame {
+      max-width: 900px;
+      margin: 30px auto;
+      border: 3px solid #b30000;
+      box-shadow: 0 0 25px #b30000;
+      background: #0b0f16;
+      padding: 20px 24px 28px;
     }
 
-    input {
+    .header-bar {
+      background: linear-gradient(90deg, #b30000, #ffcc00);
+      padding: 10px 14px;
+      margin: -20px -24px 18px;
+      color: #000;
+      font-weight: bold;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+
+    .header-bar span.right {
+      float: right;
+      font-weight: normal;
+      text-transform: none;
+    }
+
+    h1 {
+      font-size: 20px;
+      margin: 0 0 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #ffcc00;
+    }
+
+    .sub {
+      font-size: 12px;
+      color: #aaaaaa;
+      margin-bottom: 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1.2fr;
+      gap: 18px;
+    }
+
+    .panel {
+      border: 1px solid #333;
+      padding: 10px 12px 12px;
+      background: #090c12;
+    }
+
+    .panel-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #7fd4ff;
+      margin-bottom: 8px;
+    }
+
+    label {
       display: block;
-      margin: 10px 0;
-      padding: 10px;
-      width: 300px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin: 8px 0 3px;
+      color: #c0c0c0;
+    }
+
+    select,
+    input[type="text"],
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      background: #05070a;
+      border: 1px solid #333;
+      color: #e5e5e5;
+      padding: 6px 7px;
+      font-family: inherit;
+      font-size: 13px;
+      outline: none;
+    }
+
+    select:focus,
+    input[type="text"]:focus,
+    textarea:focus {
+      border-color: #7fd4ff;
+      box-shadow: 0 0 4px #7fd4ff55;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 90px;
+      max-height: 200px;
+    }
+
+    .row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .row > * {
+      flex: 1;
+    }
+
+    .small {
+      font-size: 11px;
+      color: #888;
+      margin-top: 4px;
+    }
+
+    .buttons {
+      margin-top: 14px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
     button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 6px;
+      border: 1px solid #444;
+      background: #161b24;
+      color: #e5e5e5;
+      padding: 7px 14px;
+      font-family: inherit;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
       cursor: pointer;
-      margin-top: 10px;
+    }
+
+    button.primary {
+      border-color: #ffcc00;
+      background: #332600;
+      color: #ffec99;
+    }
+
+    button.danger {
+      border-color: #b30000;
+      background: #260000;
+      color: #ffb3b3;
     }
 
     button:hover {
-      background: #45a049;
+      filter: brightness(1.15);
+    }
+
+    .status {
+      margin-top: 10px;
+      font-size: 11px;
+      color: #7fd4ff;
+    }
+
+    .status span.bad {
+      color: #ff6666;
+    }
+
+    .footer {
+      margin-top: 14px;
+      font-size: 10px;
+      color: #555;
+      text-align: right;
     }
   </style>
 </head>
 <body>
-  <h2>Press the button to send a notification</h2>
+  <div class="frame">
+    <div class="header-bar">
+      NATIONAL EMERGENCY ALERT SYSTEM – ISSUANCE CONSOLE
+      <span class="right">NWS / EAS OPS</span>
+    </div>
 
-  <input id="TitleEntry" type="text" placeholder="Title">
-  <input id="ContentEntry" type="text" placeholder="Body">
+    <h1>Severe Weather Product</h1>
+    <div class="sub">Operator interface for composing and issuing EAS‑style severe weather alerts.</div>
 
-  <button id="notifyBtn">Send Notification</button>
+    <div class="grid">
+      <!-- LEFT: SETTINGS -->
+      <div class="panel">
+        <div class="panel-title">Alert configuration</div>
+
+        <label for="eventType">Event Type</label>
+        <select id="eventType">
+          <option value="Severe Thunderstorm Warning">Severe Thunderstorm Warning</option>
+          <option value="Tornado Warning">Tornado Warning</option>
+          <option value="Flash Flood Warning">Flash Flood Warning</option>
+          <option value="Severe Thunderstorm Watch">Severe Thunderstorm Watch</option>
+          <option value="Civil Emergency Message">Civil Emergency Message</option>
+        </select>
+
+        <label for="severity">Severity</label>
+        <select id="severity">
+          <option value="Severe">Severe</option>
+          <option value="Extreme">Extreme</option>
+          <option value="Moderate">Moderate</option>
+        </select>
+
+        <label for="area">Area / Counties</label>
+        <textarea id="area" placeholder="Apple Valley, San Bernardino County, Cajon Pass"></textarea>
+
+        <label for="expires">Expires (local time)</label>
+        <input id="expires" type="text" placeholder="5:45 PM PST">
+
+        <label for="soundMode">Sound Profile</label>
+        <select id="soundMode">
+          <option value="tts-eas">TTS then EAS Alarm</option>
+          <option value="tts-only">TTS Only</option>
+          <option value="eas-only">EAS Alarm Only</option>
+          <option value="silent">Silent (Notification Only)</option>
+        </select>
+
+        <div class="buttons">
+          <button type="button" onclick="testTTS()">Test TTS</button>
+          <button type="button" onclick="testEAS()">Test Alarm</button>
+          <button type="button" class="danger" onclick="stopAll()">Stop Audio</button>
+        </div>
+
+        <div class="small">Audio is triggered only on operator interaction to comply with browser autoplay rules.</div>
+      </div>
+
+      <!-- RIGHT: MESSAGE COMPOSITION -->
+      <div class="panel">
+        <div class="panel-title">Message composition</div>
+
+        <label for="TitleEntry">Notification Title</label>
+        <input id="TitleEntry" type="text" placeholder="Severe Thunderstorm Warning">
+
+        <label for="ContentEntry">Notification Body</label>
+        <textarea id="ContentEntry" placeholder="The National Weather Service has issued a Severe Thunderstorm Warning for Apple Valley, San Bernardino County, and the Cajon Pass until 5:45 PM PST. Hazard: 60 mph winds and quarter-size hail. Seek shelter indoors immediately."></textarea>
+
+        <div class="buttons">
+          <button id="notifyBtn" class="primary" type="button">Issue Alert</button>
+          <button type="button" onclick="loadTemplate()">Load From Settings</button>
+          <button type="button" onclick="clearFields()">Clear</button>
+        </div>
+
+        <div class="status" id="statusLine">
+          STATUS: <span class="bad">Notification permission not yet requested.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      SYSTEM ID: EAS‑WX‑CONSOLE • BUILD 1.0 (HTML‑ONLY DEMO)
+    </div>
+  </div>
+
+  <!-- AUDIO: EXACT FILENAMES -->
+  <audio id="ttsSound" src="mp3-output-ttsfree(dot)com.mp3"></audio>
+  <audio id="easSound" src="n00by-usa-eas-alarm-314375.mp3"></audio>
 
   <script>
-    if (Notification.permission !== "granted") {
-      Notification.requestPermission();
+    const tts = document.getElementById("ttsSound");
+    const eas = document.getElementById("easSound");
+    const statusLine = document.getElementById("statusLine");
+
+    function updateStatus(msg, bad) {
+      statusLine.innerHTML = 'STATUS: ' +
+        (bad ? '<span class="bad">' + msg + '</span>' : msg);
     }
 
+    if (Notification.permission === "granted") {
+      updateStatus("Notification permission granted.");
+    } else if (Notification.permission === "denied") {
+      updateStatus("Notification permission denied in browser settings.", true);
+    } else {
+      updateStatus("Notification permission not yet requested.", true);
+      Notification.requestPermission().then(p => {
+        if (p === "granted") {
+          updateStatus("Notification permission granted.");
+        } else {
+          updateStatus("Notification permission denied or dismissed.", true);
+        }
+      });
+    }
+
+    function stopAll() {
+      [tts, eas].forEach(a => {
+        a.pause();
+        a.currentTime = 0;
+      });
+    }
+
+    function testTTS() {
+      stopAll();
+      tts.play();
+      updateStatus("Playing TTS test audio.");
+    }
+
+    function testEAS() {
+      stopAll();
+      eas.play();
+      updateStatus("Playing EAS alarm test audio.");
+    }
+
+    function loadTemplate() {
+      const eventType = document.getElementById("eventType").value;
+      const area = document.getElementById("area").value || "Apple Valley, San Bernardino County, and the Cajon Pass";
+      const expires = document.getElementById("expires").value || "5:45 PM PST";
+
+      document.getElementById("TitleEntry").value = eventType;
+
+      document.getElementById("ContentEntry").value =
+        "The National Weather Service has issued a " + eventType +
+        " for " + area +
+        " until " + expires +
+        ". Hazard: 60 mph winds and quarter-size hail. Seek shelter indoors immediately.";
+
+      updateStatus("Template loaded from configuration.");
+    }
+
+    function clearFields() {
+      document.getElementById("TitleEntry").value = "";
+      document.getElementById("ContentEntry").value = "";
+      updateStatus("Fields cleared.");
+    }
+
+    tts.addEventListener("ended", () => {
+      const mode = document.getElementById("soundMode").value;
+      if (mode === "tts-eas") {
+        eas.play();
+        updateStatus("TTS finished; EAS alarm playing.");
+      }
+    });
+
     document.getElementById("notifyBtn").onclick = () => {
-      new Notification(
-        document.getElementById("TitleEntry").value,
-        { body: document.getElementById("ContentEntry").value }
-      );
+      const mode = document.getElementById("soundMode").value;
+
+      stopAll();
+
+      if (mode === "tts-eas") {
+        tts.play();
+        updateStatus("Issuing alert: TTS then EAS alarm.");
+      } else if (mode === "tts-only") {
+        tts.play();
+        updateStatus("Issuing alert: TTS only.");
+      } else if (mode === "eas-only") {
+        eas.play();
+        updateStatus("Issuing alert: EAS alarm only.");
+      } else {
+        updateStatus("Issuing alert: silent mode (notification only).");
+      }
+
+      if (Notification.permission === "granted") {
+        new Notification(
+          document.getElementById("TitleEntry").value || "Alert",
+          {
+            body: document.getElementById("ContentEntry").value || "An alert has been issued."
+          }
+        );
+      } else {
+        updateStatus("Cannot send notification: permission not granted.", true);
+      }
     };
   </script>
 </body>
