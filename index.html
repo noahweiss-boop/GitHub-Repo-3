@@ -5,8 +5,12 @@
 </head>
 <body>
   <h2>Press the button to send a notification</h2>
-
+  <br/>
   <button id="notifyBtn">Send Notification</button>
+  <br/>
+  <input id="TitleEntry" type="text" placeholder="TitleEntry"></input>
+  <br/>
+  <input id="ContentEntry" type="text" placeholder="Body"></input>
 
   <script>
     // Ask for permission on load
@@ -16,8 +20,8 @@
 
     document.getElementById("notifyBtn").onclick = () => {
       if (Notification.permission === "granted") {
-        new Notification("Button Pressed!", {
-          body: "Your GitHub-hosted page just sent a notification."
+        new Notification(document.getElementById("TitleEntry").value, {
+          body: document.getElementById("ContentEntry").value
         });
       } else {
         alert("Please allow notifications first.");
