@@ -9,7 +9,6 @@
       font-family: "Consolas", "Courier New", monospace;
       color: #e5e5e5;
     }
-
     .frame {
       max-width: 900px;
       margin: 30px auto;
@@ -18,7 +17,6 @@
       background: #0b0f16;
       padding: 20px 24px 28px;
     }
-
     .header-bar {
       background: linear-gradient(90deg, #b30000, #ffcc00);
       padding: 10px 14px;
@@ -29,13 +27,11 @@
       text-transform: uppercase;
       font-size: 14px;
     }
-
     .header-bar span.right {
       float: right;
       font-weight: normal;
       text-transform: none;
     }
-
     h1 {
       font-size: 20px;
       margin: 0 0 10px;
@@ -43,25 +39,21 @@
       letter-spacing: 0.12em;
       color: #ffcc00;
     }
-
     .sub {
       font-size: 12px;
       color: #aaaaaa;
       margin-bottom: 18px;
     }
-
     .grid {
       display: grid;
       grid-template-columns: 1.1fr 1.2fr;
       gap: 18px;
     }
-
     .panel {
       border: 1px solid #333;
       padding: 10px 12px 12px;
       background: #090c12;
     }
-
     .panel-title {
       font-size: 11px;
       text-transform: uppercase;
@@ -69,7 +61,6 @@
       color: #7fd4ff;
       margin-bottom: 8px;
     }
-
     label {
       display: block;
       font-size: 11px;
@@ -78,7 +69,6 @@
       margin: 8px 0 3px;
       color: #c0c0c0;
     }
-
     select,
     input[type="text"],
     textarea {
@@ -92,27 +82,23 @@
       font-size: 13px;
       outline: none;
     }
-
     select:focus,
     input[type="text"]:focus,
     textarea:focus {
       border-color: #7fd4ff;
       box-shadow: 0 0 4px #7fd4ff55;
     }
-
     textarea {
       resize: vertical;
       min-height: 90px;
       max-height: 200px;
     }
-
     .buttons {
       margin-top: 14px;
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
     }
-
     button {
       border: 1px solid #444;
       background: #161b24;
@@ -124,33 +110,27 @@
       letter-spacing: 0.12em;
       cursor: pointer;
     }
-
     button.primary {
       border-color: #ffcc00;
       background: #332600;
       color: #ffec99;
     }
-
     button.danger {
       border-color: #b30000;
       background: #260000;
       color: #ffb3b3;
     }
-
     button:hover {
       filter: brightness(1.15);
     }
-
     .status {
       margin-top: 10px;
       font-size: 11px;
       color: #7fd4ff;
     }
-
     .status span.bad {
       color: #ff6666;
     }
-
     .footer {
       margin-top: 14px;
       font-size: 10px;
@@ -179,8 +159,37 @@
           <option value="Severe Thunderstorm Warning">Severe Thunderstorm Warning</option>
           <option value="Tornado Warning">Tornado Warning</option>
           <option value="Flash Flood Warning">Flash Flood Warning</option>
-          <option value="Severe Thunderstorm Watch">Severe Thunderstorm Watch</option>
+          <option value="Flood Warning">Flood Warning</option>
+          <option value="High Wind Warning">High Wind Warning</option>
+          <option value="Blizzard Warning">Blizzard Warning</option>
+          <option value="Ice Storm Warning">Ice Storm Warning</option>
+          <option value="Winter Storm Warning">Winter Storm Warning</option>
+          <option value="Dust Storm Warning">Dust Storm Warning</option>
+          <option value="Extreme Wind Warning">Extreme Wind Warning</option>
+          <option value="Hurricane Warning">Hurricane Warning</option>
+          <option value="Tropical Storm Warning">Tropical Storm Warning</option>
+          <option value="Storm Surge Warning">Storm Surge Warning</option>
+          <option value="Civil Danger Warning">Civil Danger Warning</option>
           <option value="Civil Emergency Message">Civil Emergency Message</option>
+          <option value="Law Enforcement Warning">Law Enforcement Warning</option>
+          <option value="Local Area Emergency">Local Area Emergency</option>
+          <option value="Evacuation Immediate">Evacuation Immediate</option>
+          <option value="Shelter in Place Warning">Shelter in Place Warning</option>
+          <option value="Radiological Hazard Warning">Radiological Hazard Warning</option>
+          <option value="Nuclear Power Plant Warning">Nuclear Power Plant Warning</option>
+          <option value="Hazardous Materials Warning">Hazardous Materials Warning</option>
+          <option value="Fire Warning">Fire Warning</option>
+          <option value="911 Telephone Outage">911 Telephone Outage</option>
+          <option value="Earthquake Warning">Earthquake Warning</option>
+          <option value="Tsunami Warning">Tsunami Warning</option>
+          <option value="Volcano Warning">Volcano Warning</option>
+          <option value="Child Abduction Emergency">Child Abduction Emergency (Amber Alert)</option>
+          <option value="Blue Alert">Blue Alert</option>
+          <option value="Administrative Message">Administrative Message</option>
+          <option value="Required Weekly Test">Required Weekly Test</option>
+          <option value="Required Monthly Test">Required Monthly Test</option>
+          <option value="National Periodic Test">National Periodic Test</option>
+          <option value="National Emergency Message">National Emergency Message</option>
         </select>
 
         <label for="severity">Severity</label>
@@ -219,11 +228,11 @@
         <input id="TitleEntry" type="text" placeholder="Severe Thunderstorm Warning">
 
         <label for="ContentEntry">Notification Body</label>
-        <textarea id="ContentEntry" placeholder="The National Weather Service has issued a Severe Thunderstorm Warning for Apple Valley, San Bernardino County, and the Cajon Pass until 5:45 PM PST. Hazard: 60 mph winds and quarter-size hail. Seek shelter indoors immediately."></textarea>
+        <textarea id="ContentEntry" placeholder="Generated EAS message will appear here."></textarea>
 
         <div class="buttons">
           <button id="notifyBtn" class="primary" type="button">Issue Alert</button>
-          <button type="button" onclick="loadTemplate()">Load From Settings</button>
+          <button type="button" onclick="loadTemplate()">Generate From Settings</button>
           <button type="button" onclick="clearFields()">Clear</button>
         </div>
 
@@ -234,11 +243,11 @@
     </div>
 
     <div class="footer">
-      SYSTEM ID: EAS‑WX‑CONSOLE • BUILD 1.0 (HTML‑ONLY DEMO)
+      SYSTEM ID: EAS‑WX‑CONSOLE • BUILD 1.1 (HTML‑ONLY DEMO)
     </div>
   </div>
 
-  <!-- ONLY ONE AUDIO FILE NEEDED -->
+  <!-- EAS ALARM AUDIO -->
   <audio id="easSound" src="n00by-usa-eas-alarm-314375.mp3"></audio>
 
   <script>
@@ -263,55 +272,136 @@
       });
     }
 
-    // Stop all audio + TTS
     function stopAll() {
       eas.pause();
       eas.currentTime = 0;
       speechSynthesis.cancel();
     }
 
-    // Test TTS
     function testTTS() {
       stopAll();
       const msg = new SpeechSynthesisUtterance(
-        document.getElementById("ContentEntry").value
+        document.getElementById("ContentEntry").value || "This is a test of the text to speech system."
       );
       speechSynthesis.speak(msg);
       updateStatus("Playing TTS test.");
     }
 
-    // Test EAS
     function testEAS() {
       stopAll();
       eas.play();
       updateStatus("Playing EAS alarm test.");
     }
 
-    // Load template
-    function loadTemplate() {
+    function generateEASMessage() {
       const eventType = document.getElementById("eventType").value;
-      const area = document.getElementById("area").value || "Apple Valley, San Bernardino County, and the Cajon Pass";
-      const expires = document.getElementById("expires").value || "5:45 PM PST";
+      const severity = document.getElementById("severity").value;
+      const areas = document.getElementById("area").value || "the affected area";
+      const expires = document.getElementById("expires").value || "further notice";
 
-      document.getElementById("TitleEntry").value = eventType;
+      const now = new Date();
+      const earlier = new Date(now.getTime() - 47 * 60000);
+      const timeString = earlier.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
 
-      document.getElementById("ContentEntry").value =
-        "The National Weather Service has issued a " + eventType +
-        " for " + area +
-        " until " + expires +
-        ". Hazard: 60 mph winds and quarter-size hail. Seek shelter indoors immediately.";
+      const eventMessages = {
+        "Severe Thunderstorm Warning": "a severe thunderstorm capable of producing damaging winds and large hail was detected",
+        "Tornado Warning": "a tornado or strong rotation capable of producing a tornado was indicated by radar",
+        "Flash Flood Warning": "rapid and life-threatening flooding is occurring or expected shortly",
+        "Flood Warning": "flooding is occurring or imminent in the warned area",
+        "High Wind Warning": "dangerous high winds are occurring or expected",
+        "Blizzard Warning": "blizzard conditions with very low visibility and strong winds are expected",
+        "Ice Storm Warning": "significant icing from freezing rain is expected",
+        "Winter Storm Warning": "heavy snow, sleet, or ice is expected",
+        "Dust Storm Warning": "widespread dust is reducing visibility to dangerous levels",
+        "Extreme Wind Warning": "extremely dangerous hurricane-force winds are expected",
+        "Hurricane Warning": "hurricane conditions are expected in the warned area",
+        "Tropical Storm Warning": "tropical storm conditions are expected in the warned area",
+        "Storm Surge Warning": "life-threatening storm surge is expected along the coast",
+        "Civil Danger Warning": "a dangerous civil situation is occurring that poses a threat to life or property",
+        "Civil Emergency Message": "local authorities have issued an urgent civil emergency affecting the public",
+        "Law Enforcement Warning": "law enforcement is responding to a dangerous situation in the area",
+        "Local Area Emergency": "local authorities have issued an emergency affecting the local area",
+        "Evacuation Immediate": "an immediate evacuation has been ordered for the affected area",
+        "Shelter in Place Warning": "authorities are advising residents to shelter in place",
+        "Radiological Hazard Warning": "a radiological hazard has been reported in the area",
+        "Nuclear Power Plant Warning": "an incident at a nuclear power facility may affect the area",
+        "Hazardous Materials Warning": "a hazardous materials incident is affecting the area",
+        "Fire Warning": "a dangerous fire is threatening populated areas",
+        "911 Telephone Outage": "911 telephone service is unavailable or severely limited in the area",
+        "Earthquake Warning": "a significant earthquake has occurred or is imminent",
+        "Tsunami Warning": "dangerous tsunami waves are expected or occurring along the coastline",
+        "Volcano Warning": "volcanic activity is occurring or expected to affect the area",
+        "Child Abduction Emergency": "law enforcement has issued a child abduction emergency and requests public assistance",
+        "Blue Alert": "law enforcement is searching for a suspect who poses a serious risk to public safety",
+        "Administrative Message": "this is an administrative message regarding emergency communications",
+        "Required Weekly Test": "this is a required weekly test of the Emergency Alert System",
+        "Required Monthly Test": "this is a required monthly test of the Emergency Alert System",
+        "National Periodic Test": "this is a national periodic test of the Emergency Alert System",
+        "National Emergency Message": "a national emergency message has been issued"
+      };
 
-      updateStatus("Template loaded.");
+      const precautions = {
+        "Severe Thunderstorm Warning": "Seek shelter indoors away from windows.",
+        "Tornado Warning": "Move to an interior room on the lowest floor of a sturdy building.",
+        "Flash Flood Warning": "Move immediately to higher ground and avoid flooded roadways.",
+        "Flood Warning": "Avoid flooded areas and do not drive through water-covered roads.",
+        "High Wind Warning": "Secure loose objects and stay away from trees and power lines.",
+        "Blizzard Warning": "Avoid travel and remain indoors if possible.",
+        "Ice Storm Warning": "Avoid travel and be prepared for power outages.",
+        "Winter Storm Warning": "Use caution if traveling and be prepared for hazardous conditions.",
+        "Dust Storm Warning": "Avoid travel and remain indoors until conditions improve.",
+        "Extreme Wind Warning": "Take shelter in an interior room away from windows.",
+        "Hurricane Warning": "Complete storm preparations and follow evacuation orders if given.",
+        "Tropical Storm Warning": "Secure loose objects and be prepared for strong winds and heavy rain.",
+        "Storm Surge Warning": "Move away from coastal areas and follow evacuation orders.",
+        "Civil Danger Warning": "Follow instructions from local authorities and remain alert.",
+        "Civil Emergency Message": "Follow instructions from local authorities and remain alert.",
+        "Law Enforcement Warning": "Avoid the affected area and follow law enforcement instructions.",
+        "Local Area Emergency": "Stay informed and follow local guidance.",
+        "Evacuation Immediate": "Leave the area immediately as directed by authorities.",
+        "Shelter in Place Warning": "Remain indoors and secure all doors and windows.",
+        "Radiological Hazard Warning": "Follow official guidance and minimize exposure by staying indoors.",
+        "Nuclear Power Plant Warning": "Follow evacuation or shelter instructions from authorities.",
+        "Hazardous Materials Warning": "Avoid the area and follow official instructions.",
+        "Fire Warning": "Be prepared to evacuate and follow fire official instructions.",
+        "911 Telephone Outage": "Use alternate emergency contact numbers provided by authorities.",
+        "Earthquake Warning": "Drop, cover, and hold on. Be prepared for aftershocks.",
+        "Tsunami Warning": "Move inland and to higher ground immediately.",
+        "Volcano Warning": "Avoid areas downwind and downstream of the volcano.",
+        "Child Abduction Emergency": "Be on the lookout and report any relevant information to law enforcement.",
+        "Blue Alert": "Report any sightings of the suspect vehicle or person to law enforcement.",
+        "Administrative Message": "No action is required.",
+        "Required Weekly Test": "No action is required.",
+        "Required Monthly Test": "No action is required.",
+        "National Periodic Test": "No action is required.",
+        "National Emergency Message": "Follow national and local official instructions."
+      };
+
+      const eventMsg = eventMessages[eventType] || "an emergency situation has been reported";
+      const precaution = precautions[eventType] || "Take appropriate protective action.";
+
+      const finalMessage =
+        `The National Weather Service has issued a ${eventType} of severity ${severity} for the following areas: ${areas}. ` +
+        `Please tune your attention to this broadcast at this time.\n\n` +
+        `At around ${timeString}, ${eventMsg}. ${precaution} ` +
+        `This alert will be in effect until ${expires}.`;
+
+      return finalMessage;
     }
 
-    // Clear fields
+    function loadTemplate() {
+      const msg = generateEASMessage();
+      document.getElementById("ContentEntry").value = msg;
+      document.getElementById("TitleEntry").value = document.getElementById("eventType").value;
+      updateStatus("Template generated from settings.");
+    }
+
     function clearFields() {
       document.getElementById("TitleEntry").value = "";
       document.getElementById("ContentEntry").value = "";
       updateStatus("Fields cleared.");
     }
 
-    // 🔥 When EAS alarm ends → speak TTS
     eas.addEventListener("ended", () => {
       const mode = document.getElementById("soundMode").value;
       if (mode === "tts-eas") {
@@ -323,7 +413,6 @@
       }
     });
 
-    // Issue alert
     document.getElementById("notifyBtn").onclick = () => {
       const mode = document.getElementById("soundMode").value;
 
@@ -332,23 +421,19 @@
       if (mode === "tts-eas") {
         eas.play();
         updateStatus("Issuing alert: EAS alarm then TTS.");
-      } 
-      else if (mode === "tts-only") {
+      } else if (mode === "tts-only") {
         const msg = new SpeechSynthesisUtterance(
           document.getElementById("ContentEntry").value
         );
         speechSynthesis.speak(msg);
         updateStatus("Issuing alert: TTS only.");
-      } 
-      else if (mode === "eas-only") {
+      } else if (mode === "eas-only") {
         eas.play();
         updateStatus("Issuing alert: EAS alarm only.");
-      } 
-      else {
+      } else {
         updateStatus("Issuing alert: silent mode.");
       }
 
-      // Desktop notification
       if (Notification.permission === "granted") {
         new Notification(
           document.getElementById("TitleEntry").value || "Alert",
